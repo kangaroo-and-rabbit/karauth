@@ -302,7 +302,7 @@ public class UserResource {
 		// create token:
 		String tok = randomString(128);
 		long idToken = -1;
-		query = "INSERT INTO `token` (`userId`, `token`, `createTime`, `endValidityTime`) VALUES (?, ?, now(), ADDTIME(now(),'23:45:0'));";
+		query = "INSERT INTO `token` (`userId`, `token`, `createTime`, `endValidityTime`) VALUES (?, ?, now(), ADDTIME(now(),'20:12:18'));";
 		try {
 			PreparedStatement ps = entry.connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			ps.setLong(1, user.id);
@@ -360,19 +360,19 @@ public class UserResource {
 
 	 */
 
-
-
-
+	public static String bytesToHex(byte[] bytes) {
+		StringBuilder sb = new StringBuilder();
+		for (byte b : bytes) {
+			sb.append(String.format("%02x", b));
+		}
+		return sb.toString();
+	}
 
 	public String getSHA512(String passwordToHash){
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			byte[] bytes = md.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
-			StringBuilder sb = new StringBuilder();
-			for(int i=0; i< bytes.length ;i++){
-				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-			}
-			return sb.toString();
+			return bytesToHex(bytes);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
