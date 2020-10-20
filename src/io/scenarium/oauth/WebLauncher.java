@@ -30,6 +30,11 @@ public class WebLauncher {
 		rc.registerClasses(UserResource.class);
 		rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.WARNING.getName());
 
+		dbConfig = new DBConfig(ConfigVariable.getDBHost(),
+				Integer.parseInt(ConfigVariable.getDBPort()),
+				ConfigVariable.getDBLogin(),
+				ConfigVariable.getDBPassword(),
+				ConfigVariable.getDBName());
 		dbConfig = new DBConfig("localhost",
 				15306,
 				"root",

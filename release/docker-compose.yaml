@@ -1,0 +1,10 @@
+version: '3'
+services:
+  Oauth_service:
+    build: .
+    restart: always
+    image: io.scenarium/oauth
+    container_name: io.scenarium.oauth
+    ports:
+      - 17080:17080
+
