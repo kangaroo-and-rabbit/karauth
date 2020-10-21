@@ -27,7 +27,7 @@ public class WebLauncher {
 
 	public static void main(String[] args) {
 		try {
-			FileInputStream propFile = new FileInputStream( "properties.txt");
+			FileInputStream propFile = new FileInputStream( "/application/properties.txt");
 			Properties p = new Properties(System.getProperties());
 			p.load(propFile);
 			for (String name : p.stringPropertyNames()) {
