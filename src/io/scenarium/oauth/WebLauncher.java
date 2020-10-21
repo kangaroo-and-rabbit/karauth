@@ -70,17 +70,23 @@ public class WebLauncher {
 		entry.disconnect();
 		entry = null;
 		*/
+		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(getBaseURI(), rc);
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("Stopping server..");
+				server.stop();
+			}
+		}, "shutdownHook"));
+
+		// run
 		try {
-			HttpServer server = GrizzlyHttpServerFactory.createHttpServer(getBaseURI(), rc);
 			server.start();
-
-			System.out.println(String.format(
-					"Jersey app started at " + "%s\nHit enter to stop it...",
-					getBaseURI(), getBaseURI()));
-
-			System.in.read();
-			server.shutdownNow();
+			System.out.println("Jersey app started at " + getBaseURI());
+			System.out.println("Press CTRL^C to exit..");
+			Thread.currentThread().join();
 		} catch (Exception e) {
+			System.out.println("There was an error while starting Grizzly HTTP server.");
 			e.printStackTrace();
 		}
 	}
