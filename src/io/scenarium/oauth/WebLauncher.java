@@ -55,21 +55,7 @@ public class WebLauncher {
 				ConfigVariable.getDBLogin(),
 				ConfigVariable.getDBPassword(),
 				ConfigVariable.getDBName());
-		dbConfig = new DBConfig("localhost",
-				15306,
-				"root",
-				"klkhj456gkgtkhjgvkujfhjgkjhgsdfhb3467465fgdhdesfgh",
-				"oauth");
-		/*
-		DBEntry entry = new DBEntry(dbConfig);
-		try {
-			entry.test();
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		}
-		entry.disconnect();
-		entry = null;
-		*/
+		
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(getBaseURI(), rc);
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			@Override
