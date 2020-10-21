@@ -9,20 +9,40 @@ import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.core.UriBuilder;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.System.Logger.Level;
 import java.net.URI;
 import java.sql.SQLException;
+import java.util.Properties;
 
 
 public class WebLauncher {
 	private WebLauncher() {}
-	public static final URI BASE_URI = getBaseURI();
 	public static DBConfig dbConfig;
 	private static URI getBaseURI() {
-		return UriBuilder.fromUri("http://localhost/oauth/api/").port(17080).build();
+		return UriBuilder.fromUri(ConfigVariable.getlocalAddress()).build();
 	}
 
 	public static void main(String[] args) {
+		try {
+			FileInputStream propFile = new FileInputStream( "properties.txt");
+			Properties p = new Properties(System.getProperties());
+			p.load(propFile);
+			for (String name : p.stringPropertyNames()) {
+				String value = p.getProperty(name);
+				// inject property if not define in cmdline:
+				if (System.getProperty(name) == null) {
+					System.setProperty(name, value);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File of environment variable not found: 'properties.txt'");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		ResourceConfig rc = new ResourceConfig();
 		// remove cors ==> all time called by an other system...
 		rc.register(new CORSFilter());
@@ -51,12 +71,12 @@ public class WebLauncher {
 		entry = null;
 		*/
 		try {
-			HttpServer server = GrizzlyHttpServerFactory.createHttpServer(BASE_URI, rc);
+			HttpServer server = GrizzlyHttpServerFactory.createHttpServer(getBaseURI(), rc);
 			server.start();
 
 			System.out.println(String.format(
 					"Jersey app started at " + "%s\nHit enter to stop it...",
-					BASE_URI, BASE_URI));
+					getBaseURI(), getBaseURI()));
 
 			System.in.read();
 			server.shutdownNow();

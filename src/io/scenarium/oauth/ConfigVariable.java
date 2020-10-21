@@ -15,10 +15,14 @@ public class ConfigVariable {
     }
 
     public static String getDBPassword() {
-        return System.getProperty("io.scenarium.web.oauth.db.port", "klkhj456gkgtkhjgvkujfhjgkjhgsdfhb3467465fgdhdesfgh");
+        return System.getProperty("io.scenarium.web.oauth.db.password", "klkhj456gkgtkhjgvkujfhjgkjhgsdfhb3467465fgdhdesfgh");
     }
 
     public static String getDBName() {
         return System.getProperty("io.scenarium.web.oauth.db.name", "oauth");
+    }
+
+    public static String getlocalAddress() {
+        return System.getProperty("io.scenarium.web.oauth.address", "http://localhost:17080/oauth/api/");
     }
 }
