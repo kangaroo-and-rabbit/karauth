@@ -5,6 +5,7 @@ import io.scenarium.oauth.db.DBConfig;
 import io.scenarium.oauth.db.DBEntry;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -48,6 +49,7 @@ public class WebLauncher {
 		rc.register(new CORSFilter());
 		// add default resource:
 		rc.registerClasses(UserResource.class);
+		rc.register(JacksonFeature.class);
 		rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.WARNING.getName());
 		System.out.println("Connect on the BDD:");
 		System.out.println("    getDBHost: '" + ConfigVariable.getDBHost() + "'");
@@ -67,7 +69,7 @@ public class WebLauncher {
 			@Override
 			public void run() {
 				System.out.println("Stopping server..");
-				server.stop();
+				server.shutdownNow();
 			}
 		}, "shutdownHook"));
 
