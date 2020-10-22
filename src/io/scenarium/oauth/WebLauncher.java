@@ -49,7 +49,12 @@ public class WebLauncher {
 		// add default resource:
 		rc.registerClasses(UserResource.class);
 		rc.property(LoggingFeature.LOGGING_FEATURE_LOGGER_LEVEL_SERVER, Level.WARNING.getName());
-
+		System.out.println("Connect on the BDD:");
+		System.out.println("    getDBHost: '" + ConfigVariable.getDBHost() + "'");
+		System.out.println("    getDBPort: '" + ConfigVariable.getDBPort() + "'");
+		System.out.println("    getDBLogin: '" + ConfigVariable.getDBLogin() + "'");
+		System.out.println("    getDBPassword: '" + ConfigVariable.getDBPassword() + "'");
+		System.out.println("    getDBName: '" + ConfigVariable.getDBName() + "'");
 		dbConfig = new DBConfig(ConfigVariable.getDBHost(),
 				Integer.parseInt(ConfigVariable.getDBPort()),
 				ConfigVariable.getDBLogin(),
