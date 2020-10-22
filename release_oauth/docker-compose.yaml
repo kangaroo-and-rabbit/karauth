@@ -6,5 +6,6 @@ services:
     image: io.scenarium/oauth
     container_name: io.scenarium.oauth
     ports:
-      - 17080:17080
-
+      - 21080:17080
+    volumes:
+      - ./properties.txt:/application/properties.txt
