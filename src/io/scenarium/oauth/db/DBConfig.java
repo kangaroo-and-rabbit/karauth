@@ -7,6 +7,17 @@ public class DBConfig {
 	private final String password;
 	private final String dbName;
 
+	@Override
+	public String toString() {
+		return "DBConfig{" +
+				"hostname='" + hostname + '\'' +
+				", port=" + port +
+				", login='" + login + '\'' +
+				", password='" + password + '\'' +
+				", dbName='" + dbName + '\'' +
+				'}';
+	}
+
 	public DBConfig(String hostname, Integer port, String login, String password, String dbName) {
 		if (hostname == null) {
 			this.hostname = "localhost";

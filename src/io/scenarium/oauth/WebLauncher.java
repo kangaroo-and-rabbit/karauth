@@ -60,7 +60,8 @@ public class WebLauncher {
 				ConfigVariable.getDBLogin(),
 				ConfigVariable.getDBPassword(),
 				ConfigVariable.getDBName());
-		
+
+		System.out.println(" ==> " + dbConfig);
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(getBaseURI(), rc);
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			@Override
