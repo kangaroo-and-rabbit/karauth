@@ -1,0 +1,6 @@
+org.kar..oauth.db.host=localhost
+org.kar..oauth.db.port=15306
+org.kar..oauth.db.login=root
+org.kar..oauth.db.password=klkhj456gkgtkhjgvkujfhjgkjhgsdfhb3467465fgdhdesfgh
+org.kar..oauth.db.name=oauth
+org.kar..oauth.address=http://localhost:17080/oauth/api/

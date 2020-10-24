@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  karauth_db_service:
+    image: mysql:latest
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      - ./config.env
+    volumes:
+      - ./data:/var/lib/mysql
+
+  karauth_adminer_service:
+    image: adminer:latest
+    restart: always
+    ports:
+      - 17079:8080
+    links:
+      - karauth_db_service:db
+
+  karauth_back_service:
+    build: back/
+    restart: always
+    image: org.kar.oauth
+    ports:
+      - 17080:17080
+    env_file:
+      - ./config.env
