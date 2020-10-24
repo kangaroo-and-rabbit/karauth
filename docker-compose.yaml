@@ -26,3 +26,7 @@ services:
       - 17080:17080
     env_file:
       - ./config.env
+    links:
+      - karauth_db_service:db
+
+
