@@ -3,26 +3,50 @@ package org.kar.oauth;
 public class ConfigVariable {
 
     public static String getDBHost() {
-        return System.getenv("org.kar.oauth.db.host", "localhost");
+        String out = System.getenv("org.kar.oauth.db.host");
+        if (out == null) {
+            return"localhost";
+        }
+        return out;
     }
 
     public static String getDBPort() {
-        return System.getenv("org.kar.oauth.db.port", "3306");
+        String out = System.getenv("org.kar.oauth.db.port");
+        if (out == null) {
+            return"3306";
+        }
+        return out;
     }
 
     public static String getDBLogin() {
-        return System.getenv("org.kar.oauth.db.login", "root");
+        String out = System.getenv("org.kar.oauth.db.login");
+        if (out == null) {
+            return"root";
+        }
+        return out;
     }
 
     public static String getDBPassword() {
-        return System.getenv("MYSQL_ROOT_PASSWORD", "klkhj456gkgtkhjgvkujfhjgkjhgsdfhb3467465fgdhdesfgh");
+        String out = System.getenv("MYSQL_ROOT_PASSWORD");
+        if (out == null) {
+            return"klkhj456gkgtkhjgvkujfhjgkjhgsdfhb3467465fgdhdesfgh";
+        }
+        return out;
     }
 
     public static String getDBName() {
-        return System.getenv("MYSQL_DATABASE", "oauth");
+        String out = System.getenv("MYSQL_DATABASE");
+        if (out == null) {
+            return"oauth";
+        }
+        return out;
     }
 
     public static String getlocalAddress() {
-        return System.getenv("org.kar.oauth.address", "http://0.0.0.0:17080/oauth/api/");
+        String out = System.getenv("org.kar.oauth.address");
+        if (out == null) {
+            return"http://0.0.0.0:17080/oauth/api/";
+        }
+        return out;
     }
 }
