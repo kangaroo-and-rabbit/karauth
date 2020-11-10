@@ -13,7 +13,8 @@ public class ConfigVariable {
     public static String getDBPort() {
         String out = System.getenv("org.kar.oauth.db.port");
         if (out == null) {
-            return"3306";
+            //return"3306";
+            return"15306";
         }
         return out;
     }
@@ -37,7 +38,7 @@ public class ConfigVariable {
     public static String getDBName() {
         String out = System.getenv("MYSQL_DATABASE");
         if (out == null) {
-            return"oauth";
+            return"karauth";
         }
         return out;
     }
@@ -45,7 +46,7 @@ public class ConfigVariable {
     public static String getlocalAddress() {
         String out = System.getenv("org.kar.oauth.address");
         if (out == null) {
-            return"http://0.0.0.0:17080/oauth/api/";
+            return"http://0.0.0.0:17080/karauth/api/";
         }
         return out;
     }
